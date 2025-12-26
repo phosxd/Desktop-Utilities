@@ -1,0 +1,126 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdv6fv77lgeey"]
+
+[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://ClassicGodot.tres" id="1_e08pe"]
+[ext_resource type="Script" uid="uid://bbh6ew2isxft" path="res://Scenes/Englueh/englueh.gd" id="2_emwo0"]
+[ext_resource type="StyleBox" uid="uid://blr7pehutjipb" path="res://Assets/option_bar_panel.tres" id="3_e1osb"]
+[ext_resource type="StyleBox" uid="uid://cxesbwo4ki7yd" path="res://Assets/content_panel.tres" id="4_gl7tf"]
+[ext_resource type="LabelSettings" uid="uid://c55ehft2bwbk1" path="res://Assets/subtle_info_label.tres" id="5_gl7tf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e1osb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gl7tf"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.2541663, 0.28510138, 0.3201532, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+anti_aliasing = false
+
+[node name="Englueh" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_e08pe")
+theme_override_constants/separation = 0
+script = ExtResource("2_emwo0")
+
+[node name="Option Bar" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_e1osb")
+
+[node name="HFlow" type="HFlowContainer" parent="Option Bar"]
+layout_mode = 2
+
+[node name="Home" type="Button" parent="Option Bar/HFlow"]
+layout_mode = 2
+text = "/"
+
+[node name="Generate" type="Button" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Generate words."
+text = "Generate"
+
+[node name="Starter" type="LineEdit" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Starter phrase to use, will determine what gets generated after it. Leave empty for random.
+
+The very last letter must be lowercase."
+placeholder_text = "Starter..."
+max_length = 6
+expand_to_text_length = true
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Word Count" type="SpinBox" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Word count."
+min_value = 1.0
+value = 5.0
+update_on_text_changed = true
+
+[node name="Word Length" type="HSlider" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+tooltip_text = "Word length."
+min_value = 2.0
+max_value = 25.0
+value = 6.0
+
+[node name="Word Length Label" type="Label" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "* char"
+label_settings = ExtResource("5_gl7tf")
+
+[node name="Copy" type="Button" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+tooltip_text = "Copy output to clipboard."
+text = "Copy"
+
+[node name="Content" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_gl7tf")
+
+[node name="Output" type="TextEdit" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_e1osb")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_gl7tf")
+placeholder_text = "No output..."
+editable = false
+context_menu_enabled = false
+emoji_menu_enabled = false
+drag_and_drop_selection_enabled = false
+
+[connection signal="pressed" from="Option Bar/HFlow/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="Option Bar/HFlow/Generate" to="." method="_on_generate_pressed"]
+[connection signal="text_changed" from="Option Bar/HFlow/Starter" to="." method="_on_starter_text_changed"]
+[connection signal="value_changed" from="Option Bar/HFlow/Word Count" to="." method="_on_word_count_value_changed"]
+[connection signal="value_changed" from="Option Bar/HFlow/Word Length" to="." method="_on_word_length_value_changed"]
+[connection signal="pressed" from="Option Bar/HFlow/Copy" to="." method="_on_copy_pressed"]

@@ -1,0 +1,174 @@
+[gd_scene load_steps=18 format=3 uid="uid://c3yyyuehvyflc"]
+
+[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://ClassicGodot.tres" id="1_k0i7p"]
+[ext_resource type="Script" uid="uid://bu48bfxf23123" path="res://Scenes/Notepad/notepad.gd" id="2_chmyn"]
+[ext_resource type="Script" uid="uid://dbap0gqox0ty1" path="res://addons/markdownlabel/markdownlabel.gd" id="3_kr2me"]
+[ext_resource type="LabelSettings" uid="uid://c55ehft2bwbk1" path="res://Assets/subtle_info_label.tres" id="3_nxrxy"]
+[ext_resource type="Script" uid="uid://dcx7crs23nf4" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="4_nxrxy"]
+[ext_resource type="Script" uid="uid://d0sin64i4v3op" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="5_lqhxr"]
+[ext_resource type="Script" uid="uid://dlok0dv1tq2bf" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="6_hvkp1"]
+[ext_resource type="Script" uid="uid://bayuh2vafablg" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="7_lpoj7"]
+[ext_resource type="Script" uid="uid://dfr1w7u3jgni3" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="8_bekem"]
+[ext_resource type="Script" uid="uid://bsi6dexoofpe6" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="9_jna03"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0i7p"]
+bg_color = Color(0.21339461, 0.24345025, 0.29020676, 1)
+anti_aliasing = false
+
+[sub_resource type="Resource" id="Resource_mhmfo"]
+resource_local_to_scene = true
+script = ExtResource("4_nxrxy")
+
+[sub_resource type="Resource" id="Resource_xtxld"]
+resource_local_to_scene = true
+script = ExtResource("5_lqhxr")
+
+[sub_resource type="Resource" id="Resource_56uol"]
+resource_local_to_scene = true
+script = ExtResource("6_hvkp1")
+
+[sub_resource type="Resource" id="Resource_p05rq"]
+resource_local_to_scene = true
+script = ExtResource("7_lpoj7")
+
+[sub_resource type="Resource" id="Resource_k77wt"]
+resource_local_to_scene = true
+script = ExtResource("8_bekem")
+
+[sub_resource type="Resource" id="Resource_aht30"]
+resource_local_to_scene = true
+script = ExtResource("9_jna03")
+
+[node name="Notepad" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_k0i7p")
+theme_override_constants/separation = 0
+script = ExtResource("2_chmyn")
+
+[node name="Option Bar" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k0i7p")
+
+[node name="HFlow" type="HFlowContainer" parent="Option Bar"]
+layout_mode = 2
+
+[node name="Home" type="Button" parent="Option Bar/HFlow"]
+layout_mode = 2
+text = "/"
+
+[node name="File" type="MenuButton" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "File"
+item_count = 2
+popup/item_0/text = "Save    CTRL-S"
+popup/item_0/id = 0
+popup/item_1/text = "Load    CTRL-L"
+popup/item_1/id = 1
+
+[node name="Editor" type="MenuButton" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Editor"
+item_count = 4
+popup/item_0/text = "Line wrap"
+popup/item_0/checkable = 1
+popup/item_0/checked = true
+popup/item_0/id = 0
+popup/item_1/text = "Show spaces"
+popup/item_1/checkable = 1
+popup/item_1/id = 1
+popup/item_2/text = "Show tabs"
+popup/item_2/checkable = 1
+popup/item_2/id = 2
+popup/item_3/text = "Show line numbers"
+popup/item_3/checkable = 1
+popup/item_3/id = 3
+
+[node name="Font" type="MenuButton" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Font"
+item_count = 2
+popup/item_0/text = "Current: DEFAULT"
+popup/item_0/id = 0
+popup/item_0/disabled = true
+popup/item_1/text = "DEFAULT"
+popup/item_1/id = 1
+
+[node name="Zoom" type="HBoxContainer" parent="Option Bar/HFlow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Zoom" type="HSlider" parent="Option Bar/HFlow/Zoom"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 6.0
+step = 2.0
+value = 18.0
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="Zoom Label" type="Label" parent="Option Bar/HFlow/Zoom"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "*px"
+label_settings = ExtResource("3_nxrxy")
+
+[node name="Toggle Markdown" type="Button" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+toggle_mode = true
+text = "Markdown"
+
+[node name="Content Split" type="HSplitContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+touch_dragger_enabled = true
+drag_area_highlight_in_editor = true
+
+[node name="Text Box" type="CodeEdit" parent="Content Split"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "Start writing..."
+backspace_deletes_composite_character_enabled = true
+wrap_mode = 1
+minimap_draw = true
+caret_blink = true
+caret_multiple = false
+auto_brace_completion_enabled = true
+
+[node name="Markdown Preview" type="RichTextLabel" parent="Content Split"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+script = ExtResource("3_kr2me")
+h1 = SubResource("Resource_mhmfo")
+h2 = SubResource("Resource_xtxld")
+h3 = SubResource("Resource_56uol")
+h4 = SubResource("Resource_p05rq")
+h5 = SubResource("Resource_k77wt")
+h6 = SubResource("Resource_aht30")
+unchecked_item_character = "◼️"
+metadata/_custom_type_script = "uid://dbap0gqox0ty1"
+
+[connection signal="pressed" from="Option Bar/HFlow/Home" to="." method="_on_home_pressed"]
+[connection signal="value_changed" from="Option Bar/HFlow/Zoom/Zoom" to="." method="_on_zoom_value_changed"]
+[connection signal="pressed" from="Option Bar/HFlow/Toggle Markdown" to="." method="_on_toggle_markdown_pressed"]
+[connection signal="dragged" from="Content Split" to="." method="_on_content_split_dragged"]
+[connection signal="text_changed" from="Content Split/Text Box" to="." method="_on_text_box_text_changed"]

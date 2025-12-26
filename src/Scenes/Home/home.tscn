@@ -1,0 +1,163 @@
+[gd_scene load_steps=6 format=3 uid="uid://ykxvi2uxul4h"]
+
+[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://ClassicGodot.tres" id="1_ppqve"]
+[ext_resource type="Script" uid="uid://bahnujagd6vcu" path="res://Scenes/Home/home.gd" id="2_5n14n"]
+[ext_resource type="StyleBox" uid="uid://blr7pehutjipb" path="res://Assets/option_bar_panel.tres" id="3_1tqq5"]
+[ext_resource type="PackedScene" uid="uid://dcasjvbmcchtq" path="res://Scenes/Home/card.tscn" id="3_2l7e3"]
+[ext_resource type="StyleBox" uid="uid://cxesbwo4ki7yd" path="res://Assets/content_panel.tres" id="4_ae61j"]
+
+[node name="Home" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_ppqve")
+theme_override_constants/separation = 0
+script = ExtResource("2_5n14n")
+
+[node name="Option Bar" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_1tqq5")
+
+[node name="HFlow" type="HFlowContainer" parent="Option Bar"]
+layout_mode = 2
+
+[node name="Home" type="Button" parent="Option Bar/HFlow"]
+layout_mode = 2
+disabled = true
+text = "/"
+
+[node name="User" type="MenuButton" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+text = "User"
+item_count = 1
+popup/item_0/text = "Go to data"
+popup/item_0/id = 0
+popup/item_0/disabled = true
+
+[node name="Favorites" type="MenuButton" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Favorites"
+
+[node name="Content" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_ae61j")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Content"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="HFlow" type="HFlowContainer" parent="Content/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+
+[node name="Notepad" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Diagram" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" parent="Content/ScrollContainer/HFlow/Diagram" index="0"]
+text = "Diagram"
+
+[node name="Macro" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" parent="Content/ScrollContainer/HFlow/Macro" index="0"]
+text = "Macro"
+
+[node name="Folder job" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" parent="Content/ScrollContainer/HFlow/Folder job" index="0"]
+text = "Folder job"
+
+[node name="File compress" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" parent="Content/ScrollContainer/HFlow/File compress" index="0"]
+text = "File compress"
+
+[node name="File encrypt" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" parent="Content/ScrollContainer/HFlow/File encrypt" index="0"]
+text = "File encrypt"
+
+[node name="UUID" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" parent="Content/ScrollContainer/HFlow/UUID" index="0"]
+text = "UUID"
+
+[node name="Key gen" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" parent="Content/ScrollContainer/HFlow/Key gen" index="0"]
+text = "Secure key generator"
+
+[node name="Chatbot" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" parent="Content/ScrollContainer/HFlow/Chatbot" index="0"]
+text = "Chatbot"
+
+[node name="Englueh" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" parent="Content/ScrollContainer/HFlow/Englueh" index="0"]
+text = "Englueh?"
+
+[connection signal="pressed" from="Content/ScrollContainer/HFlow/Notepad/Button" to="." method="_on_notepad_pressed"]
+[connection signal="pressed" from="Content/ScrollContainer/HFlow/Diagram/Button" to="." method="_on_notepad_pressed"]
+[connection signal="pressed" from="Content/ScrollContainer/HFlow/UUID/Button" to="." method="_on_uuid_pressed"]
+[connection signal="pressed" from="Content/ScrollContainer/HFlow/Englueh/Button" to="." method="_on_englueh_pressed"]
+
+[editable path="Content/ScrollContainer/HFlow/Notepad"]
+[editable path="Content/ScrollContainer/HFlow/Diagram"]
+[editable path="Content/ScrollContainer/HFlow/Macro"]
+[editable path="Content/ScrollContainer/HFlow/Folder job"]
+[editable path="Content/ScrollContainer/HFlow/File compress"]
+[editable path="Content/ScrollContainer/HFlow/File encrypt"]
+[editable path="Content/ScrollContainer/HFlow/UUID"]
+[editable path="Content/ScrollContainer/HFlow/Key gen"]
+[editable path="Content/ScrollContainer/HFlow/Chatbot"]
+[editable path="Content/ScrollContainer/HFlow/Englueh"]

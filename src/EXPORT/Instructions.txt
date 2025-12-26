@@ -1,0 +1,3 @@
+- Change directory to a fresh clone of Godot 4.5 source.
+- Copy the GDBUILD file into the Godot source directory.
+- RUN: scons platform=windows target=template_release tools=no lto=full optimize="size" production=yes use_mingw=yes build_profile="PROFILE.build" -j 6

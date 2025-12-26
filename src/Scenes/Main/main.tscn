@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3i0pyeyly3tg"]
+
+[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://ClassicGodot.tres" id="1_1r6ip"]
+[ext_resource type="Script" uid="uid://vcs6spjv286" path="res://Scenes/Main/titlebar.gd" id="2_lixft"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lixft"]
+content_margin_left = 6.0
+content_margin_top = 5.0
+content_margin_right = 6.0
+content_margin_bottom = 5.0
+bg_color = Color(0.02334517, 0.12124837, 0.29659635, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(1, 1, 1, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1r6ip"]
+content_margin_left = 6.0
+content_margin_top = 5.0
+content_margin_right = 6.0
+content_margin_bottom = 5.0
+bg_color = Color(0.2015267, 0.20152655, 0.20152658, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+anti_aliasing = false
+
+[node name="Main" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_1r6ip")
+theme_override_constants/separation = 0
+
+[node name="Titlebar" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lixft")
+script = ExtResource("2_lixft")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Titlebar"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Titlebar/HBoxContainer"]
+layout_mode = 2
+text = "Just Tools"
+
+[node name="Minimize" type="Button" parent="Titlebar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "--"
+flat = true
+
+[node name="Maximize" type="Button" parent="Titlebar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "[]"
+flat = true
+
+[node name="Close" type="Button" parent="Titlebar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "X"
+flat = true
+
+[node name="Content" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_1r6ip")
+
+[connection signal="gui_input" from="Titlebar" to="Titlebar" method="_on_gui_input"]
+[connection signal="pressed" from="Titlebar/HBoxContainer/Minimize" to="Titlebar" method="_on_minimize_pressed"]
+[connection signal="pressed" from="Titlebar/HBoxContainer/Maximize" to="Titlebar" method="_on_maximize_pressed"]
+[connection signal="pressed" from="Titlebar/HBoxContainer/Close" to="Titlebar" method="_on_close_pressed"]
