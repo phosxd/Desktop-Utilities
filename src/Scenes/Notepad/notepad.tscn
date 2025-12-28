@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://c3yyyuehvyflc"]
 
-[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://ClassicGodot.tres" id="1_k0i7p"]
+[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://Assets/ClassicGodot.tres" id="1_k0i7p"]
 [ext_resource type="Script" uid="uid://bu48bfxf23123" path="res://Scenes/Notepad/notepad.gd" id="2_chmyn"]
 [ext_resource type="Script" uid="uid://dbap0gqox0ty1" path="res://addons/markdownlabel/markdownlabel.gd" id="3_kr2me"]
 [ext_resource type="LabelSettings" uid="uid://c55ehft2bwbk1" path="res://Assets/subtle_info_label.tres" id="3_nxrxy"]

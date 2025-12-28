@@ -1,0 +1,69 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3utho34r6ppv"]
+
+[ext_resource type="Script" uid="uid://d3gunsgmue3tp" path="res://Scenes/D-ID/part.gd" id="1_fc1cf"]
+
+[node name="Part" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fc1cf")
+metadata/_tab_index = 0
+
+[node name="HFlow" type="HFlowContainer" parent="."]
+layout_mode = 2
+
+[node name="Include" type="MenuButton" parent="HFlow"]
+layout_mode = 2
+text = "Include"
+item_count = 6
+popup/item_0/text = "Letters"
+popup/item_0/checkable = 1
+popup/item_0/checked = true
+popup/item_0/id = 0
+popup/item_1/text = "Capitol letters"
+popup/item_1/checkable = 1
+popup/item_1/id = 1
+popup/item_2/text = "Numbers"
+popup/item_2/checkable = 1
+popup/item_2/checked = true
+popup/item_2/id = 2
+popup/item_3/text = "Symbols"
+popup/item_3/checkable = 1
+popup/item_3/id = 3
+popup/item_4/text = "Unicode lite"
+popup/item_4/checkable = 1
+popup/item_4/id = 4
+popup/item_5/text = "Unicode spectrum"
+popup/item_5/checkable = 1
+popup/item_5/id = 5
+
+[node name="Part length" type="SpinBox" parent="HFlow"]
+layout_mode = 2
+tooltip_text = "Part length."
+update_on_text_changed = true
+
+[node name="Custom includes" type="LineEdit" parent="HFlow"]
+layout_mode = 2
+size_flags_horizontal = 6
+tooltip_text = "Characters to include on top of selections in the \"Include\" menu.
+
+Repeating a character will make it more likely to be chosen in the random selection process."
+placeholder_text = "Custom includes..."
+
+[node name="Prefix" type="LineEdit" parent="HFlow"]
+layout_mode = 2
+size_flags_horizontal = 8
+placeholder_text = "Prefix..."
+max_length = 10
+
+[node name="Suffix" type="LineEdit" parent="HFlow"]
+layout_mode = 2
+placeholder_text = "Suffix..."
+max_length = 10
+
+[connection signal="value_changed" from="HFlow/Part length" to="." method="_on_part_length_value_changed"]
+[connection signal="text_changed" from="HFlow/Custom includes" to="." method="_on_custom_includes_text_changed"]
+[connection signal="text_changed" from="HFlow/Prefix" to="." method="_on_prefix_text_changed"]
+[connection signal="text_changed" from="HFlow/Suffix" to="." method="_on_suffix_text_changed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d3i0pyeyly3tg"]
 
-[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://ClassicGodot.tres" id="1_1r6ip"]
+[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://Assets/ClassicGodot.tres" id="1_1r6ip"]
 [ext_resource type="Script" uid="uid://vcs6spjv286" path="res://Scenes/Main/titlebar.gd" id="2_lixft"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lixft"]

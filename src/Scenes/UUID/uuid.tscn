@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bascptql8kr8n"]
 
-[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://ClassicGodot.tres" id="1_475r8"]
+[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://Assets/ClassicGodot.tres" id="1_475r8"]
 [ext_resource type="Script" uid="uid://cd4hbl8ptolqg" path="res://Scenes/UUID/uuid.gd" id="2_u6ufq"]
 [ext_resource type="StyleBox" uid="uid://blr7pehutjipb" path="res://Assets/option_bar_panel.tres" id="3_obkka"]
 [ext_resource type="LabelSettings" uid="uid://c55ehft2bwbk1" path="res://Assets/subtle_info_label.tres" id="4_gvqfl"]
