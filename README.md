@@ -9,12 +9,17 @@ Very simple notepad with a markdown preview panel & a font selector. Of course i
 ## UUID
 UUID-V4 generator frontend. The actual code for generating the UUIDs is credited to https://github.com/binogure-studio/godot-uuid.
 
+## D-ID
+Dynamic ID generator that can generate IDs with a maximum of 6 parts. Each part has a character set it can randomly pull from, the character set can be modified to include letters, capitol letters, numbers, symbols, unicode lite, & unicode spectrum characters. You can even add your own characters via the custom includes text box. Each part may also hold a prefix & suffix phrase.
+
+You can save / load your D-ID ruleset as JSON via the "File" menu or by pressing CTRL-S / CTRL-L. Loading an invalid JSON file will (likely) do nothing.
+
 ## Englueh
 Silly "english" word generator (or close enough anyway), I actually made this back in 2023 as a fun command for a Discord bot lmao.
 
 # Planned sub-apps
-## Diagram
-Simple tool to draw out diagrams / graphs. Whiteboard might be a more appropiate name actually...
+## Whiteboard
+Tool to draw out diagrams or graphs using simple placeable shapes & nodes.
 
 ## Macro
 I want this to be a very easy to use node-based macro creation tool.
@@ -27,9 +32,6 @@ Compresses files using the built-in compression in Godot
 
 ## File encrypt
 Encrypts files using the built-in file encryption in Godot.
-
-## Key generator
-Randomly generate strings of text with options to include unicode, digits, symbols, or letters.
 
 ## Chatbot
 #DeathToClankers, ahem... Anyway this will just be a frontend connected OLLAMA (local LLM platform) if you have it installed. You can save & load sessions from files.
