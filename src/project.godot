@@ -10,11 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Test"
+config/name="Desktop Utilities"
 run/main_scene="uid://ykxvi2uxul4h"
 run/enable_alt_space_menu=true
 config/features=PackedStringArray("4.5", "GL Compatibility")
 run/low_processor_mode=true
+boot_splash/bg_color=Color(0.5589727, 0.6298068, 0.71422124, 1)
+boot_splash/image="uid://ku0xk0ynqn16"
+config/icon="uid://ku0xk0ynqn16"
 
 [display]
 
@@ -31,7 +34,8 @@ enabled=PackedStringArray("res://addons/markdownlabel/plugin.cfg")
 [file_customization]
 
 folder_colors={
-"res://EXPORT/": "gray"
+"res://EXPORT/": "gray",
+"res://Other/": "gray"
 }
 
 [input]
@@ -51,4 +55,5 @@ ctrl-l={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_3d=3
 viewport/transparent_background=true

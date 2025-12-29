@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://dy71o4kwq850l"]
+
+[ext_resource type="Script" uid="uid://c5k2d1oyqlt0h" path="res://Other/3d_logo.gd" id="1_lxsse"]
+
+[sub_resource type="Environment" id="Environment_lxsse"]
+background_mode = 1
+background_color = Color(0, 1, 0, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbg1u"]
+albedo_color = Color(0.21176471, 0.24313726, 0.2901961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j47o2"]
+albedo_color = Color(0.11372549, 0.13333334, 0.16078432, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lxsse"]
+albedo_color = Color(0.7412301, 0.45109713, 0.41416267, 1)
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kqo67"]
+albedo_color = Color(0.74978, 0.74978, 0.7497799, 1)
+metallic = 0.3
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xtx5"]
+albedo_color = Color(0.8175213, 0.8175213, 0.81752115, 1)
+metallic = 0.8
+roughness = 0.5
+
+[node name="3D-Logo" type="Node3D"]
+script = ExtResource("1_lxsse")
+camera_distance = 1.8
+camera_pitch = -0.5
+camera_yaw = 0.799
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lxsse")
+
+[node name="Pad" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Base" type="CSGBox3D" parent="Pad"]
+material_override = SubResource("StandardMaterial3D_pbg1u")
+size = Vector3(1, 0.23339844, 1)
+
+[node name="Base2" type="CSGBox3D" parent="Pad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.043757465, 0)
+material_override = SubResource("StandardMaterial3D_j47o2")
+size = Vector3(1.05, 0.229, 1.05)
+
+[node name="Camera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.6974236, -0.3435845, 0.62892723, 0, 0.8775822, 0.47942534, -0.71665895, -0.3343626, 0.6120466, 1.132069, 0.8629656, 1.1016839)
+
+[node name="Pencil" type="Node3D" parent="Camera"]
+transform = Transform3D(0.55987424, 0.54142594, -0.6272155, -0.495709, 0.8254372, 0.27004817, 0.663938, 0.15972337, 0.73053086, 0.1, 0.437, -1.561)
+
+[node name="Eraser" type="CSGCylinder3D" parent="Camera/Pencil"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0)
+material_override = SubResource("StandardMaterial3D_lxsse")
+radius = 0.07324219
+height = 0.07998657
+sides = 6
+
+[node name="Base" type="CSGCylinder3D" parent="Camera/Pencil"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12, 0)
+material_override = SubResource("StandardMaterial3D_kqo67")
+radius = 0.07324219
+height = 0.4
+sides = 6
+
+[node name="Tip" type="CSGCylinder3D" parent="Camera/Pencil"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, -0.41899318, 2.3427106e-08)
+material_override = SubResource("StandardMaterial3D_5xtx5")
+radius = 0.07324219
+height = 0.12554932
+sides = 5
+cone = true
+
+[node name="Light" type="DirectionalLight3D" parent="Camera"]
+transform = Transform3D(0.8775825, 0, -0.47942552, -0.22984883, 0.87758243, -0.42073545, 0.42073548, 0.47942552, 0.7701511, 0, 0, 0)
