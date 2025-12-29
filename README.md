@@ -1,3 +1,5 @@
+<img src="src/Assets/logo.png" align=""></img>
+
 A simple app that I plan on filling with stuff I personally need, either as a replacement for other apps or just something I don't already have (offline).
 
 Right now the app has a home screen where you can select sub-apps through buttons organized in a grid. Clicking any one of the buttons will immediately open the sub-app. Each sub-app has it's own toolbar, but all of them have a button to allow you to go back (the slash button on the far left).
