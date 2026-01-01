@@ -17,3 +17,7 @@ func _on_uuid_pressed() -> void:
 
 func _on_did_pressed() -> void:
 	tree.change_scene_to_file('res://Scenes/D-ID/d-id.tscn')
+
+
+func _on_die_now_pressed() -> void:
+	tree.change_scene_to_file('res://Scenes/Die now/die now.tscn')

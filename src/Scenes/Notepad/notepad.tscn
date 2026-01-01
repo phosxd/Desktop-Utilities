@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c3yyyuehvyflc"]
+[gd_scene load_steps=20 format=3 uid="uid://c3yyyuehvyflc"]
 
 [ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://Assets/ClassicGodot.tres" id="1_k0i7p"]
 [ext_resource type="Script" uid="uid://bu48bfxf23123" path="res://Scenes/Notepad/notepad.gd" id="2_chmyn"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://bayuh2vafablg" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="7_lpoj7"]
 [ext_resource type="Script" uid="uid://dfr1w7u3jgni3" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="8_bekem"]
 [ext_resource type="Script" uid="uid://bsi6dexoofpe6" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="9_jna03"]
+[ext_resource type="StyleBox" uid="uid://blr7pehutjipb" path="res://Assets/option_bar_panel.tres" id="11_hvkp1"]
+[ext_resource type="StyleBox" uid="uid://b1dem1gpo4q3m" path="res://Assets/tab_bar_tab_selected__bottom_highlighted.tres" id="12_lpoj7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0i7p"]
 bg_color = Color(0.21339461, 0.24345025, 0.29020676, 1)
@@ -166,6 +168,21 @@ h5 = SubResource("Resource_k77wt")
 h6 = SubResource("Resource_aht30")
 unchecked_item_character = "◼️"
 metadata/_custom_type_script = "uid://dbap0gqox0ty1"
+
+[node name="Tab Container" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = ExtResource("11_hvkp1")
+
+[node name="Tabs" type="TabBar" parent="Tab Container"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/tab_selected = ExtResource("12_lpoj7")
+current_tab = 0
+close_with_middle_mouse = false
+tab_close_display_policy = 2
+tab_count = 1
+tab_0/title = "Untitled"
 
 [connection signal="pressed" from="Option Bar/HFlow/Home" to="." method="_on_home_pressed"]
 [connection signal="value_changed" from="Option Bar/HFlow/Zoom/Zoom" to="." method="_on_zoom_value_changed"]

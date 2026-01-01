@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://beff0naixqxau"]
+
+[ext_resource type="StyleBox" uid="uid://dgp2a6d0noak" path="res://Assets/option_bar_panel_with_margin.tres" id="1_m2cb4"]
+[ext_resource type="Script" uid="uid://br48nhvmoqli2" path="res://Scenes/Die now/card.gd" id="2_m2cb4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ue16r"]
+bg_color = Color(0.88418096, 0.10383738, 0.19481418, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5qnu7"]
+bg_color = Color(0.19459918, 0.4197168, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 2
+
+[node name="Card" type="PanelContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("1_m2cb4")
+script = ExtResource("2_m2cb4")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Move" type="VScrollBar" parent="HBox"]
+layout_mode = 2
+tooltip_text = "Move card. Drag & release knob to move the card."
+max_value = 1.0
+step = 0.5
+value = 0.5
+
+[node name="Kill" type="Button" parent="HBox"]
+layout_mode = 2
+tooltip_text = "Kill this process."
+text = "Kill"
+
+[node name="Running indicator off" type="Panel" parent="HBox"]
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Running: No"
+theme_override_styles/panel = SubResource("StyleBoxFlat_ue16r")
+
+[node name="Running indicator on" type="Panel" parent="HBox"]
+visible = false
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Running: Yes"
+theme_override_styles/panel = SubResource("StyleBoxFlat_5qnu7")
+
+[node name="Process name" type="Label" parent="HBox"]
+layout_mode = 2
+text = "placeholder name"
+
+[node name="Copy path" type="Button" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Copy path"
+
+[node name="Remove" type="Button" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Remove this process from the list."
+text = "X"
+
+[connection signal="gui_input" from="HBox/Move" to="." method="_on_move_gui_input"]
+[connection signal="pressed" from="HBox/Kill" to="." method="_on_kill_pressed"]
+[connection signal="pressed" from="HBox/Copy path" to="." method="_on_copy_path_pressed"]
+[connection signal="pressed" from="HBox/Remove" to="." method="_on_remove_pressed"]

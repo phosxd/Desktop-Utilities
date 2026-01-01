@@ -1,0 +1,128 @@
+[gd_scene load_steps=8 format=3 uid="uid://yg4usnpxvuye"]
+
+[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://Assets/ClassicGodot.tres" id="1_ijq13"]
+[ext_resource type="Script" uid="uid://b0775g8wbgrw0" path="res://Scenes/Die now/die now.gd" id="2_7t4jc"]
+[ext_resource type="StyleBox" uid="uid://blr7pehutjipb" path="res://Assets/option_bar_panel.tres" id="3_k4oqj"]
+[ext_resource type="LabelSettings" uid="uid://c55ehft2bwbk1" path="res://Assets/subtle_info_label.tres" id="4_ih28n"]
+[ext_resource type="StyleBox" uid="uid://cxesbwo4ki7yd" path="res://Assets/content_panel.tres" id="5_ftjop"]
+[ext_resource type="StyleBox" uid="uid://chohgokxswjur" path="res://Assets/content_panel_no_margin.tres" id="6_muq7u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muq7u"]
+content_margin_left = 6.0
+content_margin_top = 5.0
+content_margin_right = 6.0
+content_margin_bottom = 5.0
+bg_color = Color(0.14699998, 0.16799998, 0.203, 1)
+border_color = Color(0.115499996, 0.132, 0.15949999, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 3
+anti_aliasing = false
+
+[node name="Die now" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_ijq13")
+theme_override_constants/separation = 0
+script = ExtResource("2_7t4jc")
+
+[node name="Option Bar" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_k4oqj")
+
+[node name="HFlow" type="HFlowContainer" parent="Option Bar"]
+layout_mode = 2
+
+[node name="Home" type="Button" parent="Option Bar/HFlow"]
+layout_mode = 2
+text = "/"
+
+[node name="File" type="MenuButton" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "File"
+item_count = 2
+popup/item_0/text = "Save    CTRL-S"
+popup/item_0/id = 0
+popup/item_1/text = "Load    CTRL-L"
+popup/item_1/id = 1
+
+[node name="Kill all" type="Button" parent="Option Bar/HFlow"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Kill all processes in the list. May require admin access."
+theme_override_colors/font_color = Color(0.8856623, 0.36104503, 0.37078664, 1)
+text = "Kill all"
+
+[node name="Label" type="Label" parent="Option Bar/HFlow"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Process killer. Because some apps love to stay beyond their welcome."
+label_settings = ExtResource("4_ih28n")
+
+[node name="Content" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("5_ftjop")
+
+[node name="VBox" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="Content/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Process Cards" type="VBoxContainer" parent="Content/VBox/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBox" type="HBoxContainer" parent="Content/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Refresh" type="Button" parent="Content/VBox/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Refresh process list."
+text = "Refresh"
+
+[node name="Add process" type="MenuButton" parent="Content/VBox/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_muq7u")
+text = "Add new process"
+flat = false
+
+[node name="Info" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("6_muq7u")
+
+[node name="VBox" type="VBoxContainer" parent="Info"]
+layout_mode = 2
+
+[node name="WMIC Warning" type="Label" parent="Info/VBox"]
+layout_mode = 2
+text = "Functionality relies on the deprecated \"wmic\" Windows command. If you do not have it installed, please go & do so to use this."
+label_settings = ExtResource("4_ih28n")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Admin Warning" type="Label" parent="Info/VBox"]
+layout_mode = 2
+text = "Some processes will fail to close unless this was opened with ADMINISTRATOR permissions."
+label_settings = ExtResource("4_ih28n")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="Option Bar/HFlow/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="Option Bar/HFlow/Kill all" to="." method="_on_kill_all_pressed"]
+[connection signal="pressed" from="Content/VBox/HBox/Refresh" to="." method="_on_refresh_pressed"]

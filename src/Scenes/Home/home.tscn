@@ -67,14 +67,22 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Diagram" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
+[node name="Whiteboard" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Button" parent="Content/ScrollContainer/HFlow/Diagram" index="0"]
-text = "Diagram"
+[node name="Button" parent="Content/ScrollContainer/HFlow/Whiteboard" index="0"]
+text = "Whiteboard"
+
+[node name="Die now" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" parent="Content/ScrollContainer/HFlow/Die now" index="0"]
+text = "Die now"
 
 [node name="Macro" parent="Content/ScrollContainer/HFlow" instance=ExtResource("3_2l7e3")]
 visible = false
@@ -146,13 +154,15 @@ size_flags_vertical = 4
 text = "Englueh?"
 
 [connection signal="pressed" from="Content/ScrollContainer/HFlow/Notepad/Button" to="." method="_on_notepad_pressed"]
-[connection signal="pressed" from="Content/ScrollContainer/HFlow/Diagram/Button" to="." method="_on_notepad_pressed"]
+[connection signal="pressed" from="Content/ScrollContainer/HFlow/Whiteboard/Button" to="." method="_on_notepad_pressed"]
+[connection signal="pressed" from="Content/ScrollContainer/HFlow/Die now/Button" to="." method="_on_die_now_pressed"]
 [connection signal="pressed" from="Content/ScrollContainer/HFlow/UUID/Button" to="." method="_on_uuid_pressed"]
 [connection signal="pressed" from="Content/ScrollContainer/HFlow/D-ID/Button" to="." method="_on_did_pressed"]
 [connection signal="pressed" from="Content/ScrollContainer/HFlow/Englueh/Button" to="." method="_on_englueh_pressed"]
 
 [editable path="Content/ScrollContainer/HFlow/Notepad"]
-[editable path="Content/ScrollContainer/HFlow/Diagram"]
+[editable path="Content/ScrollContainer/HFlow/Whiteboard"]
+[editable path="Content/ScrollContainer/HFlow/Die now"]
 [editable path="Content/ScrollContainer/HFlow/Macro"]
 [editable path="Content/ScrollContainer/HFlow/Folder job"]
 [editable path="Content/ScrollContainer/HFlow/File compress"]
