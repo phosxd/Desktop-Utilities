@@ -99,6 +99,7 @@ func _on_generate_pressed() -> void:
 	for i in range(word_count):
 		lines.append(''.join(generate()))
 	# Set output.
+	%Output.clear()
 	%Output.text = '\n'.join(lines)
 
 

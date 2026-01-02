@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://cje0dr7i7p5j6"]
+[gd_scene load_steps=7 format=3 uid="uid://cje0dr7i7p5j6"]
 
-[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://Assets/ClassicGodot.tres" id="1_5gx8s"]
 [ext_resource type="Script" uid="uid://c1jeida5gv1x5" path="res://Scenes/D-ID/d-id.gd" id="2_xjonb"]
 [ext_resource type="StyleBox" uid="uid://blr7pehutjipb" path="res://Assets/option_bar_panel.tres" id="3_ei4ip"]
 [ext_resource type="PackedScene" uid="uid://d3utho34r6ppv" path="res://Scenes/D-ID/part.tscn" id="4_v4f0r"]
@@ -33,7 +32,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_5gx8s")
 theme_override_constants/separation = 0
 script = ExtResource("2_xjonb")
 

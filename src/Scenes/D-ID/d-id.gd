@@ -60,14 +60,14 @@ func _load_file(path:String) -> void:
 	
 	var json = JSON.parse_string(text)
 	if json is not Dictionary:
-		printerr('Invalid JSON.')
+		OS.alert('File contains invalid JSON.', 'Error')
 		return
 	var header = json.get('.HEADER')
 	if header.get('type', '') != 'd-id ruleset':
-		printerr('Wrong header type.')
+		OS.alert('JSON contains wrong header type. Expected "d-id ruleset".', 'Error')
 		return
-	if header.get('version', -1) != '1':
-		printerr('Wrong header version.')
+	if header.get('version', 'unknown') != '1':
+		OS.alert('JSON contains wrong header version. Expected "1".', 'Error')
 		return
 	
 	id_count = json.get('id_count', id_count)
@@ -120,6 +120,7 @@ func _on_generate_pressed() -> void:
 	for i in range(id_count):
 		lines.append(part_joiner.join(generate()))
 	# Set output.
+	%Output.clear()
 	%Output.text = '\n'.join(lines)
 
 

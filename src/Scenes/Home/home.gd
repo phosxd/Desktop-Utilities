@@ -1,6 +1,16 @@
 extends VBoxContainer
 
 @onready var tree = get_tree()
+@onready var user_menu_popup:PopupMenu = %User.get_popup()
+
+
+func _ready() -> void:
+	user_menu_popup.id_pressed.connect(_user_menu_popup_button_pressed)
+
+
+func _user_menu_popup_button_pressed(id:int) -> void:
+	match id:
+		0: OS.shell_open(ProjectSettings.globalize_path('user://'))
 
 
 func _on_notepad_pressed() -> void:

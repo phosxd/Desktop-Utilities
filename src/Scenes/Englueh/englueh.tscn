@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdv6fv77lgeey"]
+[gd_scene load_steps=7 format=3 uid="uid://cdv6fv77lgeey"]
 
-[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://Assets/ClassicGodot.tres" id="1_e08pe"]
 [ext_resource type="Script" uid="uid://bbh6ew2isxft" path="res://Scenes/Englueh/englueh.gd" id="2_emwo0"]
 [ext_resource type="StyleBox" uid="uid://blr7pehutjipb" path="res://Assets/option_bar_panel.tres" id="3_e1osb"]
 [ext_resource type="StyleBox" uid="uid://cxesbwo4ki7yd" path="res://Assets/content_panel.tres" id="4_gl7tf"]
@@ -33,7 +32,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_e08pe")
 theme_override_constants/separation = 0
 script = ExtResource("2_emwo0")
 

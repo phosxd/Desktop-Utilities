@@ -29,6 +29,7 @@ func _on_generate_pressed() -> void:
 	for i in range(uuid_count):
 		lines.append(UUID_v4.v4())
 	# Set output.
+	%Output.clear()
 	%Output.text = '\n'.join(lines)
 
 

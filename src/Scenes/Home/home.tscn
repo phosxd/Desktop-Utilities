@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://ykxvi2uxul4h"]
+[gd_scene load_steps=5 format=3 uid="uid://ykxvi2uxul4h"]
 
-[ext_resource type="Theme" uid="uid://dfifqmkg1j0mt" path="res://Assets/ClassicGodot.tres" id="1_ppqve"]
 [ext_resource type="Script" uid="uid://bahnujagd6vcu" path="res://Scenes/Home/home.gd" id="2_5n14n"]
 [ext_resource type="StyleBox" uid="uid://blr7pehutjipb" path="res://Assets/option_bar_panel.tres" id="3_1tqq5"]
 [ext_resource type="PackedScene" uid="uid://dcasjvbmcchtq" path="res://Scenes/Home/card.tscn" id="3_2l7e3"]
@@ -14,7 +13,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_ppqve")
 theme_override_constants/separation = 0
 script = ExtResource("2_5n14n")
 
@@ -38,7 +36,6 @@ text = "User"
 item_count = 1
 popup/item_0/text = "Go to data"
 popup/item_0/id = 0
-popup/item_0/disabled = true
 
 [node name="Favorites" type="MenuButton" parent="Option Bar/HFlow"]
 unique_name_in_owner = true

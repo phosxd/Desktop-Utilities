@@ -11,13 +11,16 @@ config_version=5
 [application]
 
 config/name="Desktop Utilities"
+config/version="0.0.1"
 run/main_scene="uid://ykxvi2uxul4h"
 run/enable_alt_space_menu=true
+config/use_custom_user_dir=true
+config/custom_user_dir_name="SOHP/Desktop Utilities"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 run/low_processor_mode=true
-boot_splash/bg_color=Color(0.5589727, 0.6298068, 0.71422124, 1)
-boot_splash/image="uid://ku0xk0ynqn16"
-config/icon="uid://ku0xk0ynqn16"
+boot_splash/bg_color=Color(0.2610256, 0.31016064, 0.38095957, 1)
+boot_splash/image="uid://bcaqj028ehipo"
+config/icon="uid://bcaqj028ehipo"
 
 [display]
 
@@ -41,6 +44,10 @@ folder_colors={
 "res://Scripts/": "red"
 }
 
+[gui]
+
+theme/custom="uid://dfifqmkg1j0mt"
+
 [input]
 
 ctrl-s={
@@ -63,5 +70,6 @@ mouse_left={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+limits/time/time_rollover_secs=1028.0
 anti_aliasing/quality/msaa_3d=3
 viewport/transparent_background=true
