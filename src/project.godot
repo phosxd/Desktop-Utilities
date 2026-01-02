@@ -34,8 +34,11 @@ enabled=PackedStringArray("res://addons/markdownlabel/plugin.cfg")
 [file_customization]
 
 folder_colors={
+"res://Assets/": "yellow",
 "res://EXPORT/": "gray",
-"res://Other/": "gray"
+"res://Other/": "gray",
+"res://Scenes/": "blue",
+"res://Scripts/": "red"
 }
 
 [input]

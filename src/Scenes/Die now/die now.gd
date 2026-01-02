@@ -4,6 +4,7 @@ const card_tscn := preload('res://Scenes/Die now/card.tscn')
 
 @onready var tree = get_tree()
 @onready var file_menu_popup:PopupMenu = %File.get_popup()
+@onready var flags_menu_popup:PopupMenu = %Flags.get_popup()
 @onready var add_process_menu_popup:PopupMenu = %'Add process'.get_popup()
 var current_processes:Array[WindowsProcess] = []
 
@@ -21,10 +22,13 @@ class WindowsProcess:
 		self.name = name
 
 
-	func kill() -> void:
-		if pid == -1: return # Do nothing if placeholder PID.
-		OS.kill(pid)
-		pid = -1
+	## Returns "-1" if failed.
+	func kill(forceful:bool=false) -> int:
+		if pid == -1: return -1 # Return if placeholder PID.
+		var f_flag := ' /f' if forceful else ''
+		var exit_code:int = OS.execute('CMD.exe', PackedStringArray(['/C', 'taskkill /pid '+str(pid)+f_flag]))
+		if exit_code != -1: pid = -1
+		return exit_code
 
 
 
@@ -74,10 +78,14 @@ func refresh_process_list() -> bool:
 	return true
 
 
-func add_process_card(process:WindowsProcess) -> void:
+func add_process_card(process:WindowsProcess, process_running:bool=true, flags:Array[bool]=[]) -> void:
 	var card := card_tscn.instantiate()
-	card.update(process, true)
 	%'Process Cards'.add_child(card)
+	card.update(process, process_running)
+	var index:int = -1
+	for flag:bool in flags:
+		index += 1
+		card.set_property(index, flag)
 
 
 
@@ -86,23 +94,14 @@ func add_process_card(process:WindowsProcess) -> void:
 # --------------
 
 func save_file() -> void:
-	var file_dialog := FileDialog.new()
-	file_dialog.title = 'Save your process killer script'
-	file_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
-	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
-	file_dialog.add_filter('*.bat')
-	file_dialog.current_file = 'new_process_killer.bat'
-	file_dialog.file_selected.connect(_save_file)
-	file_dialog.use_native_dialog = true
-	file_dialog.force_native = true
-	file_dialog.min_size = Vector2i(175, 100)
-	file_dialog.show()
+	PopupTool.popup_file_save('Save your process killer script', PackedStringArray(['*.bat']), 'new_process_killer.bat', _save_file)
 
 
 func _save_file(path:String) -> void:
 	var commands := PackedStringArray()
 	for card:Control in %'Process Cards'.get_children():
-		commands.append('taskkill /f /im "'+card.process.name+'"')
+		var f_flag := ' /f' if card.forceful else ''
+		commands.append('taskkill /im "'+card.process.name+'" /t' + f_flag + ' &::'+card.process.path)
 
 	var script = '@echo off\n' + '\n'.join(commands)
 	var file := FileAccess.open(path, FileAccess.WRITE)
@@ -111,16 +110,7 @@ func _save_file(path:String) -> void:
 
 
 func load_file() -> void:
-	var file_dialog := FileDialog.new()
-	file_dialog.title = 'Load a custom ID generator'
-	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
-	file_dialog.add_filter('*.json')
-	file_dialog.file_selected.connect(_load_file)
-	file_dialog.use_native_dialog = true
-	file_dialog.force_native = true
-	file_dialog.min_size = Vector2i(175, 100)
-	file_dialog.show()
+	PopupTool.popup_file_load('Load a custom ID generator', PackedStringArray(['*.bat']), _load_file)
 
 
 func _load_file(path:String) -> void:
@@ -130,7 +120,15 @@ func _load_file(path:String) -> void:
 
 	var lines := text.split('\n')
 	for line in lines:
-		pass
+		if not line.begins_with('taskkill /im'): continue
+		var process_name:String = line.split('"')[1]
+		var command_and_flags = line.split('&::')[0].replace('"'+process_name+'"','').split(' ', false)
+		var process_path:String = line.split('&::', false).get(1)
+		var f_flag:bool = command_and_flags.has('/f')
+		var t_flag:bool = command_and_flags.has('/t')
+		add_process_card(WindowsProcess.new(process_path, -1, process_name), false, [f_flag, t_flag])
+
+	refresh_process_list()
 
 
 
@@ -140,6 +138,7 @@ func _load_file(path:String) -> void:
 
 func _ready() -> void:
 	file_menu_popup.id_pressed.connect(_file_menu_button_pressed)
+	flags_menu_popup.id_pressed.connect(_flags_menu_button_pressed)
 	add_process_menu_popup.id_pressed.connect(_add_process_menu_button_pressed)
 	refresh_process_list()
 
@@ -157,6 +156,13 @@ func _file_menu_button_pressed(id:int) -> void:
 		1: load_file()
 
 
+func _flags_menu_button_pressed(id:int) -> void:
+	var is_item_checked:bool = flags_menu_popup.is_item_checked(id)
+	flags_menu_popup.set_item_checked(id, not is_item_checked)
+	for card:Control in %'Process Cards'.get_children():
+		card.set_property(id, not is_item_checked)
+
+
 func _add_process_menu_button_pressed(id:int) -> void:
 	var process = current_processes.get(id)
 	if process is not WindowsProcess:
@@ -172,7 +178,11 @@ func _on_refresh_pressed() -> void:
 	refresh_process_list()
 
 
-
 func _on_kill_all_pressed() -> void:
 	for card:Control in %'Process Cards'.get_children():
 		card._on_kill_pressed()
+
+
+func _on_forceful_all_toggled(toggled_on: bool) -> void:
+	for card:Control in %'Process Cards'.get_children():
+		card.update(card.process, card.process_running, toggled_on)

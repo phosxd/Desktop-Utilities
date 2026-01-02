@@ -19,18 +19,7 @@ const font_property_names:Array[String] = [
 # ---------------
 
 func save_file() -> void:
-	var file_dialog := FileDialog.new()
-	file_dialog.title = 'Save your note'
-	file_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
-	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
-	file_dialog.add_filter('*.txt')
-	file_dialog.add_filter('*.md')
-	file_dialog.current_file = 'new_note.txt'
-	file_dialog.file_selected.connect(_save_file)
-	file_dialog.use_native_dialog = true
-	file_dialog.force_native = true
-	file_dialog.min_size = Vector2i(175, 100)
-	file_dialog.show()
+	PopupTool.popup_file_save('Save your note', PackedStringArray(['*.txt','*.md']), 'new_note.txt', _save_file)
 
 
 func _save_file(path:String) -> void:
@@ -40,17 +29,7 @@ func _save_file(path:String) -> void:
 
 
 func load_file() -> void:
-	var file_dialog := FileDialog.new()
-	file_dialog.title = 'Load a note'
-	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
-	file_dialog.add_filter('*.txt')
-	file_dialog.add_filter('*.md')
-	file_dialog.file_selected.connect(_load_file)
-	file_dialog.use_native_dialog = true
-	file_dialog.force_native = true
-	file_dialog.min_size = Vector2i(175, 100)
-	file_dialog.show()
+	PopupTool.popup_file_load('Load a note', PackedStringArray(['*.txt','*.md']), _load_file)
 
 
 func _load_file(path:String) -> void:

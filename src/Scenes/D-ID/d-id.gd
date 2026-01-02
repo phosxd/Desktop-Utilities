@@ -27,17 +27,7 @@ func generate() -> PackedStringArray:
 # ---------------
 
 func save_file() -> void:
-	var file_dialog := FileDialog.new()
-	file_dialog.title = 'Save your custom ID generator'
-	file_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
-	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
-	file_dialog.add_filter('*.json')
-	file_dialog.current_file = 'new_id_generator.json'
-	file_dialog.file_selected.connect(_save_file)
-	file_dialog.use_native_dialog = true
-	file_dialog.force_native = true
-	file_dialog.min_size = Vector2i(175, 100)
-	file_dialog.show()
+	PopupTool.popup_file_save('Save your custom ID generator', PackedStringArray(['*.json']), 'new_id_generator.json', _save_file)
 
 
 func _save_file(path:String) -> void:
@@ -60,16 +50,7 @@ func _save_file(path:String) -> void:
 
 
 func load_file() -> void:
-	var file_dialog := FileDialog.new()
-	file_dialog.title = 'Load a custom ID generator'
-	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
-	file_dialog.add_filter('*.json')
-	file_dialog.file_selected.connect(_load_file)
-	file_dialog.use_native_dialog = true
-	file_dialog.force_native = true
-	file_dialog.min_size = Vector2i(175, 100)
-	file_dialog.show()
+	PopupTool.popup_file_load('Load a custom ID generator', PackedStringArray(['*.json']), _load_file)
 
 
 func _load_file(path:String) -> void:

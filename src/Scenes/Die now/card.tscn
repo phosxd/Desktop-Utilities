@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://beff0naixqxau"]
+[gd_scene load_steps=6 format=3 uid="uid://beff0naixqxau"]
 
 [ext_resource type="StyleBox" uid="uid://dgp2a6d0noak" path="res://Assets/option_bar_panel_with_margin.tres" id="1_m2cb4"]
 [ext_resource type="Script" uid="uid://br48nhvmoqli2" path="res://Scenes/Die now/card.gd" id="2_m2cb4"]
+[ext_resource type="StyleBox" uid="uid://b6cgvibuh5bcg" path="res://Assets/nonflat_menu_button_normal.tres" id="3_ue16r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ue16r"]
 bg_color = Color(0.88418096, 0.10383738, 0.19481418, 1)
@@ -53,6 +54,17 @@ layout_mode = 2
 tooltip_text = "Kill this process."
 text = "Kill"
 
+[node name="Flags" type="MenuButton" parent="HBox"]
+layout_mode = 2
+tooltip_text = "/F = Forcefully kill process, no cleanup or reaction time is permitted."
+theme_override_styles/normal = ExtResource("3_ue16r")
+text = "Flags"
+flat = false
+item_count = 1
+popup/item_0/text = "/F"
+popup/item_0/checkable = 1
+popup/item_0/id = 0
+
 [node name="Running indicator off" type="Panel" parent="HBox"]
 custom_minimum_size = Vector2(13, 13)
 layout_mode = 2
@@ -70,6 +82,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_5qnu7")
 
 [node name="Process name" type="Label" parent="HBox"]
 layout_mode = 2
+mouse_filter = 1
 text = "placeholder name"
 
 [node name="Copy path" type="Button" parent="HBox"]
