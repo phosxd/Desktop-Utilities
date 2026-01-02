@@ -94,6 +94,11 @@ theme_override_styles/normal = ExtResource("5_6aerq")
 text = "Add new process"
 flat = false
 
+[node name="Add comment" type="Button" parent="Content/VBox/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add comment"
+
 [node name="Info" type="PanelContainer" parent="."]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("6_muq7u")
@@ -118,3 +123,4 @@ autowrap_mode = 3
 [connection signal="pressed" from="Option Bar/HFlow/Home" to="." method="_on_home_pressed"]
 [connection signal="pressed" from="Option Bar/HFlow/Kill all" to="." method="_on_kill_all_pressed"]
 [connection signal="pressed" from="Content/VBox/HBox/Refresh" to="." method="_on_refresh_pressed"]
+[connection signal="pressed" from="Content/VBox/HBox/Add comment" to="." method="_on_add_comment_pressed"]

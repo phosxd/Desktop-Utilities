@@ -72,6 +72,7 @@ unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Word count."
 min_value = 1.0
+max_value = 500.0
 value = 5.0
 update_on_text_changed = true
 

@@ -1,6 +1,7 @@
 extends VBoxContainer
 
 const card_tscn := preload('res://Scenes/Die now/card.tscn')
+const comment_card_tscn := preload("res://Scenes/Die now/comment_card.tscn")
 
 @onready var tree = get_tree()
 @onready var file_menu_popup:PopupMenu = %File.get_popup()
@@ -67,10 +68,11 @@ func refresh_process_list() -> bool:
 
 	# Update cards.
 	for card:Control in %'Process Cards'.get_children():
+		if card.card_type != &'process': continue
 		var active:bool = false
 		var new_process:WindowsProcess = card.process
 		for process in current_processes:
-			if card.process.path == process.path:
+			if not card.process.path.is_empty() && card.process.path == process.path:
 				active = true
 				new_process = process
 		card.update(new_process, active)
@@ -88,6 +90,12 @@ func add_process_card(process:WindowsProcess, process_running:bool=true, flags:A
 		card.set_property(index, flag)
 
 
+func add_comment_card(text:String='') -> void:
+	var card := comment_card_tscn.instantiate()
+	%'Process Cards'.add_child(card)
+	card.set_text(text)
+
+
 
 
 # File functions.
@@ -100,8 +108,14 @@ func save_file() -> void:
 func _save_file(path:String) -> void:
 	var commands := PackedStringArray()
 	for card:Control in %'Process Cards'.get_children():
-		var f_flag := ' /f' if card.forceful else ''
-		commands.append('taskkill /im "'+card.process.name+'" /t' + f_flag + ' &::'+card.process.path)
+		# Add taskkill command.
+		if card.card_type == &'process':
+			var f_flag := ' /f' if card.forceful else ''
+			commands.append('taskkill /im "'+card.process.name+'" /t' + f_flag + ' &::'+card.process.path)
+		# Add comment.
+		elif card.card_type == &'comment':
+			if card.text.is_empty(): commands.append('')
+			else: commands.append(':: '+card.text)
 
 	var script = '@echo off\n' + '\n'.join(commands)
 	var file := FileAccess.open(path, FileAccess.WRITE)
@@ -118,8 +132,13 @@ func _load_file(path:String) -> void:
 	var text := file.get_as_text()
 	file.close()
 
-	var lines := text.split('\n')
+	var lines := text.split('\n', true)
 	for line in lines:
+		# Add comment card.
+		if line == '' or line.begins_with('::'):
+			add_comment_card(line.trim_prefix(':: ').trim_prefix('::'))
+			continue
+		# Add process card.
 		if not line.begins_with('taskkill /im'): continue
 		var process_name:String = line.split('"')[1]
 		var command_and_flags = line.split('&::')[0].replace('"'+process_name+'"','').split(' ', false)
@@ -180,9 +199,15 @@ func _on_refresh_pressed() -> void:
 
 func _on_kill_all_pressed() -> void:
 	for card:Control in %'Process Cards'.get_children():
+		if card.card_type != &'process': continue
 		card._on_kill_pressed()
 
 
 func _on_forceful_all_toggled(toggled_on: bool) -> void:
 	for card:Control in %'Process Cards'.get_children():
+		if card.card_type != &'process': continue
 		card.update(card.process, card.process_running, toggled_on)
+
+
+func _on_add_comment_pressed() -> void:
+	add_comment_card()

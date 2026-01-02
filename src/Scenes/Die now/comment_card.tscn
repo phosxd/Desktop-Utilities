@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj7fib5ved8bt"]
+
+[ext_resource type="StyleBox" uid="uid://dgp2a6d0noak" path="res://Assets/option_bar_panel_with_margin.tres" id="1_0m27y"]
+[ext_resource type="Script" uid="uid://c8r82tm7ylc5t" path="res://Scenes/Die now/comment_card.gd" id="2_0m27y"]
+
+[node name="Card" type="PanelContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("1_0m27y")
+script = ExtResource("2_0m27y")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Text" type="TextEdit" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter comment here..."
+scroll_fit_content_height = true
+
+[node name="Remove" type="Button" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Remove this comment from the list."
+text = "X"
+
+[connection signal="text_changed" from="HBox/Text" to="." method="_on_text_text_changed"]
+[connection signal="pressed" from="HBox/Remove" to="." method="_on_remove_pressed"]

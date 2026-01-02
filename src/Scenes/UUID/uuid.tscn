@@ -57,13 +57,14 @@ unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "UUID count."
 min_value = 1.0
+max_value = 500.0
 value = 5.0
 update_on_text_changed = true
 
 [node name="Label" type="Label" parent="Option Bar/HFlow"]
 layout_mode = 2
 size_flags_horizontal = 6
-text = "UUID V4 Generator: by \"bingoure-studio\" on Github"
+text = "UUID V4 Generator: by \"binogure-studio\" on Github"
 label_settings = ExtResource("4_gvqfl")
 
 [node name="Copy" type="Button" parent="Option Bar/HFlow"]

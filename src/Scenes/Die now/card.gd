@@ -1,6 +1,7 @@
 extends PanelContainer
 
 
+const card_type := &'process'
 @onready var flags_menu_popup:PopupMenu = $HBox/Flags.get_popup()
 var process: RefCounted
 var process_running:bool = false
