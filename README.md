@@ -1,6 +1,6 @@
 <div align="middle">
 
-<img src="src/Assets/logo.png" align="" width=170 height=170></img>
+<img src="src/Assets/logo.png" width=170 height=170></img>
 
 </div>
 
@@ -10,6 +10,7 @@ A simple app that I plan on filling with stuff I personally need, either as a re
 - [About](#about)
 - [Sub-apps](#sub-apps)
   - [Notepad](#notepad)
+  - [Die now](#die-now)
   - [UUID](#uuid)
   - [D-ID](#d-id)
   - [Englueh](#englueh)
@@ -28,27 +29,39 @@ A simple app that I plan on filling with stuff I personally need, either as a re
 # About
 Desktop Utilities is a free open source Godot app for Windows. The app contains sub-apps accessible through the home menu which displays a grid of options. There are plenty of sub-apps available for everyday use
 
+<img src="git_assets/home_1.png"></img>
+
 # Sub-apps
 ## Notepad
 Very simple notepad with a markdown preview panel & a font selector. Of course it also has save & load functionality, however your settings are reset when you leave notepad.
 
+<img src="git_assets/notepad_1.png"></img>
+
 ## Die now
-Process killer for Windows, you can easily modify a list of processes that you can either indivually kill or all at once! You can also export & load as a Bash script so you can run the killer from other programs or without having to open Desktop Utilities.
+Process killer for Windows, you can easily modify a list of processes that you can either individually kill or all at once! You can also export & load as a Batch script so you can run the killer from other programs or without having to open Desktop Utilities.
 
 I created this for the sole purpose of ACTUALLY closing game launchers after I closed the app, because they just love to stay in the background & pile up serving no purpose other than to collect telemetry data & eat up your RAM. I used to have a special little Bash script I manually edit & run anytime I find a program that has stayed beyond it's welcome, but now use this which for me is a lot more convenient.
 
-It would be really nice if I could somehow find a way of automatically killing launchers when I exit their app, but there doesn't seem to be any way of reliabley doing that.
+It would be really nice if I could somehow find a way of automatically killing launchers when I exit their app, but there doesn't seem to be any way of reliabley doing that (if there is, do let me know).
+
+<img src="git_assets/die_now_1.png"></img>
 
 ## UUID
 UUID-V4 generator frontend. The actual code for generating the UUIDs is credited to https://github.com/binogure-studio/godot-uuid.
 
+<img src="git_assets/uuid_1.png"></img>
+
 ## D-ID
 Dynamic ID generator that can generate IDs with a maximum of 6 parts. Each part has a character set it can randomly pull from, the character set can be modified to include letters, capitol letters, numbers, symbols, unicode lite, & unicode spectrum characters. You can even add your own characters via the custom includes text box. Each part may also hold a prefix & suffix phrase.
 
-You can save / load your D-ID ruleset as JSON via the "File" menu or by pressing CTRL-S / CTRL-L. Loading an invalid JSON file will (likely) do nothing.
+You can save / load your D-ID ruleset as JSON via the "File" menu. Loading an invalid JSON file will (likely) do nothing.
+
+<img src="git_assets/did_1.png"></img>
 
 ## Englueh
 Silly "english" word generator (or close enough anyway), I actually made this back in 2023 as a fun command for a Discord bot lmao.
+
+<img src="git_assets/englueh_1.png"></img>
 
 # Planned sub-apps
 ## Whiteboard
@@ -67,7 +80,7 @@ Compresses files using the built-in compression in Godot
 Encrypts files using the built-in file encryption in Godot.
 
 ## Chatbot
-#DeathToClankers, ahem... Anyway this will just be a frontend connected OLLAMA (local LLM platform) if you have it installed. You can save & load sessions from files.
+\#DeathToClankers, ahem... Anyway this will just be a frontend connected OLLAMA (local LLM platform) if you have it installed. You can save & load sessions from files.
 
 I want this to have a focus on actually useful stuff like data organization & analysis so it will include built-in tools that make it much easier to do while attempting to prevent hallucinations by making many small requests.
 
