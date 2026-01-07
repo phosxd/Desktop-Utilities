@@ -8,6 +8,14 @@
 
 config_version=5
 
+[addons]
+
+rakugo/game_version="1.0.0"
+rakugo/history_length=30
+rakugo/narrator/name="narrator"
+rakugo/debug=false
+rakugo/save_folder="user://saves"
+
 [application]
 
 config/name="Desktop Utilities"
@@ -21,6 +29,7 @@ run/low_processor_mode=true
 boot_splash/bg_color=Color(0.2610256, 0.31016064, 0.38095957, 1)
 boot_splash/image="uid://bcaqj028ehipo"
 config/icon="uid://bcaqj028ehipo"
+addons/icon_finder/preview_size=24
 
 [display]
 
@@ -29,6 +38,10 @@ window/size/viewport_height=500
 window/size/sharp_corners=true
 window/energy_saving/keep_screen_on=false
 window/vsync/vsync_mode=0
+
+[editor]
+
+script/search_in_file_extensions=PackedStringArray("gd", "gdshader", "rk")
 
 [editor_plugins]
 

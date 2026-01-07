@@ -40,6 +40,24 @@ func _load_file(path:String) -> void:
 	%'Markdown Preview'.markdown_text = text
 
 
+func store_settings_in_text() -> void:
+	%'Text Box'.text = """@dtu-np font %s
+@dtu-np font_size %s
+@dtu-np line_wrap %s
+@dtu-np show_spaces %s
+@dtu-np show_tabs %s
+@dtu-np show_line_numbers %s
+
+""" % [
+		font_menu_popup.get_item_text(0).replace('Current: ', ''),
+		%'Zoom'.value,
+		%'Text Box'.wrap_mode,
+		%'Text Box'.draw_spaces,
+		%'Text Box'.draw_tabs,
+		%'Text Box'.gutters_draw_line_numbers,
+	] + %'Text Box'.text
+
+
 # Editor functions.
 # -----------------
 
@@ -65,6 +83,8 @@ func _ready() -> void:
 		font_menu_popup.add_item(font)
 
 	_on_zoom_value_changed(%Zoom.value)
+	_on_text_box_text_changed()
+	_on_text_box_caret_changed()
 
 
 func _process(_delta:float) -> void:
@@ -82,6 +102,7 @@ func _file_menu_button_pressed(id:int) -> void:
 	match id:
 		0: save_file()
 		1: load_file()
+		2: store_settings_in_text()
 
 
 func _editor_menu_button_pressed(id:int) -> void:
@@ -108,7 +129,48 @@ func _font_menu_button_pressed(id:int) -> void:
 
 
 func _on_text_box_text_changed() -> void:
-	%'Markdown Preview'.markdown_text = %'Text Box'.text
+	var text:String = %'Text Box'.text
+	%'Markdown Preview'.markdown_text = text
+	%Length.text = 'Len ' + str(text.length())
+	%Bytes.text = str(text.to_utf8_buffer().size()) + ' Bytes (UTF-8)'
+
+	# Update editor settings.
+	var settings_found:Array[String] = []
+	for line:String in text.split('\n'):
+		if line.begins_with('@dtu-np '):
+			var setting_name := line.split(' ')[1]
+			var setting_value := line.replace('@dtu-np '+setting_name+' ', '')
+			if settings_found.has(setting_name): continue
+			match setting_name:
+				'font':
+					settings_found.append('font')
+					var font_index:int = -1
+					for i in range(font_menu_popup.item_count):
+						if font_menu_popup.get_item_text(i) == setting_value:
+							font_index = i
+							break
+					if font_index != -1:
+						_font_menu_button_pressed(font_index)
+				'font_size':
+					settings_found.append('font_size')
+					%'Zoom'.value = int(setting_value)
+				'line_wrap':
+					settings_found.append('line_wrap')
+					%'Text Box'.wrap_mode = int(setting_value)
+				'show_spaces':
+					settings_found.append('show_spaces')
+					%'Text Box'.draw_spaces = setting_value == 'true'
+				'show_tabs':
+					settings_found.append('show_tabs')
+					%'Text Box'.draw_tabs = setting_value == 'true'
+				'show_line_numbers':
+					settings_found.append('show_line_numbers')
+					%'Text Box'.gutters_draw_line_numbers = setting_value == 'true'
+
+
+func _on_text_box_caret_changed() -> void:
+	%'Collumn'.text = 'Col ' + str(%'Text Box'.get_caret_column())
+	%'Line'.text = 'Ln ' + str(%'Text Box'.get_caret_line())
 
 
 func _on_toggle_markdown_pressed() -> void:

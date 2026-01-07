@@ -1,44 +1,44 @@
 [gd_scene load_steps=19 format=3 uid="uid://c3yyyuehvyflc"]
 
 [ext_resource type="Script" uid="uid://bu48bfxf23123" path="res://Scenes/Notepad/notepad.gd" id="2_chmyn"]
-[ext_resource type="Script" uid="uid://dbap0gqox0ty1" path="res://addons/markdownlabel/markdownlabel.gd" id="3_kr2me"]
+[ext_resource type="StyleBox" uid="uid://dkc386we2ljwf" path="res://Assets/split_bar_background.tres" id="3_hvkp1"]
+[ext_resource type="Script" uid="uid://dbap0gqox0ty1" path="res://addons/markdownlabel/markdownlabel.gd" id="3_lqhxr"]
 [ext_resource type="LabelSettings" uid="uid://c55ehft2bwbk1" path="res://Assets/subtle_info_label.tres" id="3_nxrxy"]
-[ext_resource type="Script" uid="uid://dcx7crs23nf4" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="4_nxrxy"]
-[ext_resource type="Script" uid="uid://d0sin64i4v3op" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="5_lqhxr"]
-[ext_resource type="Script" uid="uid://dlok0dv1tq2bf" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="6_hvkp1"]
-[ext_resource type="Script" uid="uid://bayuh2vafablg" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="7_lpoj7"]
-[ext_resource type="Script" uid="uid://dfr1w7u3jgni3" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="8_bekem"]
-[ext_resource type="Script" uid="uid://bsi6dexoofpe6" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="9_jna03"]
+[ext_resource type="Script" uid="uid://dcx7crs23nf4" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="4_hvkp1"]
+[ext_resource type="Script" uid="uid://d0sin64i4v3op" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="5_lpoj7"]
+[ext_resource type="Script" uid="uid://dlok0dv1tq2bf" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="6_bekem"]
+[ext_resource type="Script" uid="uid://bayuh2vafablg" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="7_jna03"]
+[ext_resource type="Script" uid="uid://dfr1w7u3jgni3" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="8_mhmfo"]
+[ext_resource type="Script" uid="uid://bsi6dexoofpe6" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="9_xtxld"]
 [ext_resource type="StyleBox" uid="uid://blr7pehutjipb" path="res://Assets/option_bar_panel.tres" id="11_hvkp1"]
-[ext_resource type="StyleBox" uid="uid://b1dem1gpo4q3m" path="res://Assets/tab_bar_tab_selected__bottom_highlighted.tres" id="12_lpoj7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0i7p"]
 bg_color = Color(0.21339461, 0.24345025, 0.29020676, 1)
 anti_aliasing = false
 
-[sub_resource type="Resource" id="Resource_mhmfo"]
-resource_local_to_scene = true
-script = ExtResource("4_nxrxy")
-
-[sub_resource type="Resource" id="Resource_xtxld"]
-resource_local_to_scene = true
-script = ExtResource("5_lqhxr")
-
 [sub_resource type="Resource" id="Resource_56uol"]
 resource_local_to_scene = true
-script = ExtResource("6_hvkp1")
+script = ExtResource("4_hvkp1")
 
 [sub_resource type="Resource" id="Resource_p05rq"]
 resource_local_to_scene = true
-script = ExtResource("7_lpoj7")
+script = ExtResource("5_lpoj7")
 
 [sub_resource type="Resource" id="Resource_k77wt"]
 resource_local_to_scene = true
-script = ExtResource("8_bekem")
+script = ExtResource("6_bekem")
 
 [sub_resource type="Resource" id="Resource_aht30"]
 resource_local_to_scene = true
-script = ExtResource("9_jna03")
+script = ExtResource("7_jna03")
+
+[sub_resource type="Resource" id="Resource_010ws"]
+resource_local_to_scene = true
+script = ExtResource("8_mhmfo")
+
+[sub_resource type="Resource" id="Resource_k7ive"]
+resource_local_to_scene = true
+script = ExtResource("9_xtxld")
 
 [node name="Notepad" type="VBoxContainer"]
 anchors_preset = 15
@@ -66,11 +66,13 @@ text = "/"
 unique_name_in_owner = true
 layout_mode = 2
 text = "File"
-item_count = 2
+item_count = 3
 popup/item_0/text = "Save    CTRL-S"
 popup/item_0/id = 0
 popup/item_1/text = "Load    CTRL-L"
 popup/item_1/id = 1
+popup/item_2/text = "Store settings in text"
+popup/item_2/id = 2
 
 [node name="Editor" type="MenuButton" parent="Option Bar/HFlow"]
 unique_name_in_owner = true
@@ -134,9 +136,9 @@ text = "Markdown"
 [node name="Content Split" type="HSplitContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-touch_dragger_enabled = true
-drag_area_highlight_in_editor = true
+theme_override_styles/split_bar_background = ExtResource("3_hvkp1")
 
 [node name="Text Box" type="CodeEdit" parent="Content Split"]
 unique_name_in_owner = true
@@ -157,33 +159,53 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-script = ExtResource("3_kr2me")
-h1 = SubResource("Resource_mhmfo")
-h2 = SubResource("Resource_xtxld")
-h3 = SubResource("Resource_56uol")
-h4 = SubResource("Resource_p05rq")
-h5 = SubResource("Resource_k77wt")
-h6 = SubResource("Resource_aht30")
-unchecked_item_character = "◼️"
+script = ExtResource("3_lqhxr")
+h1 = SubResource("Resource_56uol")
+h2 = SubResource("Resource_p05rq")
+h3 = SubResource("Resource_k77wt")
+h4 = SubResource("Resource_aht30")
+h5 = SubResource("Resource_010ws")
+h6 = SubResource("Resource_k7ive")
 metadata/_custom_type_script = "uid://dbap0gqox0ty1"
 
-[node name="Tab Container" type="PanelContainer" parent="."]
-visible = false
+[node name="Info" type="PanelContainer" parent="."]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("11_hvkp1")
 
-[node name="Tabs" type="TabBar" parent="Tab Container"]
+[node name="HBox" type="HBoxContainer" parent="Info"]
+layout_mode = 2
+
+[node name="Line" type="Label" parent="Info/HBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_styles/tab_selected = ExtResource("12_lpoj7")
-current_tab = 0
-close_with_middle_mouse = false
-tab_close_display_policy = 2
-tab_count = 1
-tab_0/title = "Untitled"
+text = "Ln *"
+label_settings = ExtResource("3_nxrxy")
+
+[node name="Collumn" type="Label" parent="Info/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Col *"
+label_settings = ExtResource("3_nxrxy")
+
+[node name="Sep 1" type="VSeparator" parent="Info/HBox"]
+layout_mode = 2
+
+[node name="Length" type="Label" parent="Info/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Len *"
+label_settings = ExtResource("3_nxrxy")
+
+[node name="Bytes" type="Label" parent="Info/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "* Bytes (UTF-8)"
+label_settings = ExtResource("3_nxrxy")
 
 [connection signal="pressed" from="Option Bar/HFlow/Home" to="." method="_on_home_pressed"]
 [connection signal="value_changed" from="Option Bar/HFlow/Zoom/Zoom" to="." method="_on_zoom_value_changed"]
 [connection signal="pressed" from="Option Bar/HFlow/Toggle Markdown" to="." method="_on_toggle_markdown_pressed"]
 [connection signal="dragged" from="Content Split" to="." method="_on_content_split_dragged"]
+[connection signal="caret_changed" from="Content Split/Text Box" to="." method="_on_text_box_caret_changed"]
 [connection signal="text_changed" from="Content Split/Text Box" to="." method="_on_text_box_text_changed"]
